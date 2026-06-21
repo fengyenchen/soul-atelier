@@ -1,65 +1,52 @@
-import Image from "next/image";
+import Link from "next/link";
+import Crown from "@/components/Crown";
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+    <main className="w-full h-screen flex flex-col justify-between p-8 md:px-16 relative overflow-hidden bg-background">
+
+      {/* 3D 皇冠 */}
+      <Crown />
+
+      {/* 頁首 */}
+      <header className="w-full text-left z-10">
+        <span className="font-serif text-sm tracking-widest text-secondary uppercase">
+          Soul Atelier // 靈魂工坊
+        </span>
+      </header>
+
+      {/* 空出適當的垂直間距 */}
+      <div className="h-8 md:h-16" />
+
+      {/* 主視覺 */}
+      <div className="max-w-xl mx-auto text-center my-auto z-10 flex flex-col items-center gap-6">
+        <h1 className="font-serif text-3xl md:text-4xl lg:text-5xl tracking-widest text-primary leading-relaxed">
+          AI 人格測驗
+        </h1>
+
+        {/* 空出適當的垂直間距給背景的 3D 皇冠展示 */}
+        <div className="h-68 md:h-84" />
+
+        {/* 開始按鈕 */}
+        <Link href="/quiz">
+          <button className="group relative px-12 py-3.5 overflow-hidden rounded-full border border-primary/20 bg-background text-primary tracking-widest text-sm font-serif shadow-xs transition-all duration-500 hover:border-primary hover:bg-background-dark cursor-pointer">
+            <span className="relative z-10">進入工坊，開始探索</span>
+          </button>
+        </Link>
+      </div>
+
+      {/* 頁尾 */}
+      <footer className="w-full flex flex-col md:flex-row justify-center md:justify-between items-center md:items-end gap-4 z-10">
+        <p className="text-center md:text-left text-sm md:text-base text-secondary tracking-wide font-light leading-loose max-w-md">
+          日常的喧囂裡，你是否曾好奇過自己的內心？
+          <br />
+          撥開生活的迷霧，讓 AI 聆聽你的靈魂低語。
+        </p>
+
+        <p className="text-xs text-secondary/60 tracking-wider font-light">
+          © 2026 Soul Atelier. All rights reserved.
+        </p>
+      </footer>
+    </main>
   );
 }
