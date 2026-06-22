@@ -3,7 +3,7 @@ import Crown from "@/components/Crown";
 
 export default function Home() {
   return (
-    <main className="w-full h-screen flex flex-col justify-between p-8 md:px-16 relative overflow-hidden bg-background">
+    <main className="w-full h-screen flex flex-col p-8 md:px-16 relative bg-background">
 
       {/* 3D 皇冠 */}
       <Crown />
