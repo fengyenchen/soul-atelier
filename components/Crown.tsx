@@ -1,27 +1,27 @@
 "use client";
 
 import { useRef, useState, useEffect, Suspense } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
-import { useGLTF, Center, Environment } from "@react-three/drei";
+import { Canvas, useFrame, useLoader } from "@react-three/fiber";
+import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+
+import { Environment, Center } from "@react-three/drei";
 import { Bloom, EffectComposer } from "@react-three/postprocessing";
 import * as THREE from "three";
 
-// 內部模型組件
+// 1. 將模型獨立成子元件
 function Model() {
   const localGroupRef = useRef<THREE.Group>(null);
-  const { scene } = useGLTF("/3d/crown.glb");
+  const gltf = useLoader(GLTFLoader, "/3d/crown.glb");
 
   useFrame((state) => {
     if (localGroupRef.current) {
       // Y 軸固定自我旋轉
       localGroupRef.current.rotation.y += 0.005;
-      
+
       // 規律上下漂浮
       localGroupRef.current.position.y = Math.sin(state.clock.getElapsedTime() * 0.8) * 0.08;
 
-      // 根據滑鼠位置讓皇冠微微偏轉
-      // state.pointer 的範圍在 -1 到 1 之間
-      
+      // 根據滑鼠位置讓皇冠微微偏轉（state.pointer 的範圍在 -1 到 1 之間）
       const targetRotationY = state.pointer.x * 0.35;
       const targetRotationX = -state.pointer.y * 0.15;
 
@@ -30,7 +30,7 @@ function Model() {
         targetRotationX,
         0.05
       );
-      
+
       // 這裡把自轉加上滑鼠偏轉
       localGroupRef.current.rotation.z = THREE.MathUtils.lerp(
         localGroupRef.current.rotation.z,
@@ -43,52 +43,58 @@ function Model() {
   return (
     <group ref={localGroupRef}>
       <Center precise>
-        <primitive object={scene} scale={24} />
+        <primitive object={gltf.scene} scale={24} />
       </Center>
     </group>
   );
 }
 
 export default function Crown() {
+  // 建立一個狀態來決定目前是否為手機板（預設為 false 避免 SSR 報錯）
   const [isMobile, setIsMobile] = useState(false);
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setMounted(true);
+    
     const handleResize = () => {
       setIsMobile(window.innerWidth < 768);
     };
+
     handleResize();
+
+    // 監聽視窗大小改變
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  // SSR 安全檢查與加載動畫
   if (!mounted) {
     return (
-      <div className="absolute inset-0 flex items-center justify-center bg-background">
-        <span className="font-serif text-xs text-secondary/40 tracking-widest animate-pulse">
-          正在凝聚靈魂空間...
-        </span>
+      <div className="absolute inset-0 flex items-center justify-center bg-background font-serif text-xs text-secondary/40 tracking-widest animate-pulse">
+        正在凝聚靈魂空間...
       </div>
     );
   }
 
   return (
     <div className="absolute inset-0 w-full h-screen mix-blend-multiply opacity-90 transition-opacity duration-1000 animate-fade-in z-0">
-      <Canvas 
-        camera={{ 
-          position: isMobile ? [0, 0.2, 5.5] : [0, 0.2, 4], 
-          fov: 45 
-        }} 
+      <Canvas
+        camera={{
+          position: isMobile ? [0, 0.2, 4.5] : [0, 0.4, 4],
+          fov: 45,
+        }}
         gl={{ alpha: true, antialias: true }}
       >
         <Environment preset="dawn" background={false} />
+        
         <ambientLight intensity={1.5} />
         <directionalLight position={[0, 5, 12]} intensity={0.2} color="#ffffff" />
         <directionalLight position={[0, -5, -12]} intensity={0.6} color="#ffffff" />
         <directionalLight position={[-5, 2, 10]} intensity={0.8} color="#DACBFF" />
         <directionalLight position={[5, 2, 10]} intensity={0.8} color="#FFCBE2" />
 
+        {/* 2. 將 Suspense 包裹剛剛建立的 Model 元件 */}
         <Suspense fallback={null}>
           <Model />
         </Suspense>

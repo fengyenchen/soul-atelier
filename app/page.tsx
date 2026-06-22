@@ -9,28 +9,26 @@ export default function Home() {
       <Crown />
 
       {/* 頁首 */}
-      <header className="w-full text-left z-10">
-        <span className="font-serif text-sm tracking-widest text-secondary uppercase">
-          Soul Atelier // 靈魂工坊
-        </span>
+      <header className="w-full text-left z-10 font-serif text-sm tracking-widest text-secondary">
+        SOUL ATELIER // 靈魂工坊
       </header>
 
-      {/* 空出適當的垂直間距 */}
-      <div className="h-8 md:h-16" />
+      {/* 空出適當的垂直間距在大標題上方 */}
+      <div className="h-0 md:h-16" />
 
       {/* 主視覺 */}
       <div className="max-w-xl mx-auto text-center my-auto z-10 flex flex-col items-center gap-6">
         <h1 className="font-serif text-3xl md:text-4xl lg:text-5xl tracking-widest text-primary leading-relaxed">
-          AI 人格測驗
+          探索你的靈魂
         </h1>
 
         {/* 空出適當的垂直間距給背景的 3D 皇冠展示 */}
-        <div className="h-68 md:h-84" />
+        <div className="h-72 md:h-84" />
 
         {/* 開始按鈕 */}
         <Link href="/quiz">
-          <button className="group relative px-12 py-3.5 overflow-hidden rounded-full border border-primary/20 bg-background text-primary tracking-widest text-sm font-serif shadow-xs transition-all duration-500 hover:border-primary hover:bg-background-dark cursor-pointer">
-            <span className="relative z-10">進入工坊，開始探索</span>
+          <button className="relative z-10 px-12 py-3.5 overflow-hidden rounded-full border border-primary/20 bg-background text-primary tracking-widest text-sm font-serif shadow-xs transition-all duration-500 hover:border-primary hover:bg-background-dark cursor-pointer">
+            進入工坊，開始探索
           </button>
         </Link>
       </div>
