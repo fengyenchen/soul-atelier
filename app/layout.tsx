@@ -15,6 +15,21 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Soul Atelier",
   description: "一個 AI 人格測驗，快來找尋你是哪種角色。",
+  icons: {
+    icon: "/favicon.png",
+  },
+  openGraph: {
+    title: "Soul Atelier 靈魂工坊",
+    description: "一個 AI 人格測驗，快來找尋你是哪種角色。",
+    images: [
+      {
+        url: "/og.jpg",
+        width: 1200,
+        height: 1200,
+        alt: "Soul Atelier 靈魂工坊",
+      },
+    ],
+  },
 };
 
 export default function RootLayout({

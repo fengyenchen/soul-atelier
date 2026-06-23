@@ -36,7 +36,7 @@ export default function QuizPage() {
         <main className="w-full h-screen flex flex-col justify-between p-8 md:px-16 bg-background">
             {/* 頁首 */}
             <header className="w-full text-left z-10 font-serif text-sm tracking-widest text-secondary/40">
-                Soul Atelier // 探索階段
+                SOUL ATELIER // 探索階段
             </header>
 
             {/* 問答區 */}
