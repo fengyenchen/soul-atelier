@@ -19,14 +19,14 @@ export const metadata: Metadata = {
     icon: "/favicon.png",
   },
   openGraph: {
-    title: "Soul Atelier 靈魂工坊",
-    description: "一個 AI 人格測驗，快來找尋你是哪種角色。",
+    title: "Soul Atelier 靈魂工坊 | AI 人格測驗",
+    description: "探索內心深處的自我。這是一場 AI 驅動的人格測驗，快來找尋屬於你的靈魂角色！",
     images: [
       {
         url: "/og.jpg",
         width: 1200,
-        height: 1200,
-        alt: "Soul Atelier 靈魂工坊",
+        height: 630,
+        alt: "Soul Atelier 靈魂工坊 - AI 人格測驗首頁",
       },
     ],
   },
