@@ -23,6 +23,10 @@
     color: var(--color-primary);
     font-family: var(--font-sans);
   }
+
+  img {
+    display: unset;
+  }
 }
 
 ::selection {
@@ -36,5 +40,5 @@
 
 ::-webkit-scrollbar-thumb {
   background-color: rgba(100, 100, 100, 0.1);
-  border-radius: 2px; 
+  border-radius: 2px;
 }
